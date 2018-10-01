@@ -14,13 +14,16 @@ import java.util.LinkedList;
 public class Vertice {
     final private String nombre;
     final private int x, y;
-    LinkedList<Integer> adyacentes;
+    LinkedList<Arista> aristas;
+    public static int contID=0;
+    int serial;
     
     public Vertice(String nombre, int x, int y) {
         this.nombre = nombre;
         this.x = x;
         this.y = y;
-        adyacentes = new LinkedList<Integer>();
+        aristas = new LinkedList<>();
+        this.serial=contID++;
     }
     
     public String getNombre() {
@@ -34,6 +37,14 @@ public class Vertice {
     public int getY() {
         return y;
     }
+
+    public int getSerial() {
+        return serial;
+    }
+    public void addArista(int serial, int costo){
+        this.aristas.add(new Arista(serial, costo));
+    }
+    
     public boolean superPosicion(int xFinal, int yFinal){
         int xInicial = this.getX();
         int yInicial = this.getY();
@@ -43,5 +54,4 @@ public class Vertice {
         else            
         return false;
     }
-    
 }

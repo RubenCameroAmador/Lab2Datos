@@ -13,22 +13,23 @@ import javax.swing.ImageIcon;
  *
  * @author rdcamero
  */
-public class paint {
+public class Paint {
     
     static void drawOval(String nombre, Graphics g, int x, int y){
-        g.setColor(Color.blue);
+        g.setColor(Color.BLACK);
         g.drawOval(x, y, 60, 60);
         g.drawString(nombre, x+15, y+30);
         g.dispose();
     }
     
+    static void drawEdge(Vertice Vo, Vertice Vf){
+        
+    }
     private void  imagen(Graphics g){
         ImageIcon mapa = new ImageIcon(new ImageIcon(getClass().getResource("imagen/bquilla.png")).getImage()); 
         g.drawImage(mapa.getImage(),0 , 0, 200,200,null);
     }
-    static boolean superPosicion(){
-        return false;
-    }
+    
     
     
 }

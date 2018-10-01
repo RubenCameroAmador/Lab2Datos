@@ -5,6 +5,7 @@
  */
 package lab2datos;
 
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,18 +13,22 @@ import javax.swing.JOptionPane;
  * @author rdcamero
  */
 public class Grafica extends javax.swing.JFrame {
+
     Grafo grafo;
+    boolean pintar;
+
     /**
      * Creates new form Grafica
      */
     public Grafica() {
         initComponents();
-        this.grafo= new Grafo();
-        this.setBounds(0 , 0, 1000, 600);
-        label.setText("Empiece a agregar vertices");
+        this.grafo = new Grafo();
+        this.setBounds(0, 0, 1000, 600);
+        this.setTitle("Lab2 Estructura de Datos II ");
         arista.setVisible(false);
+        this.pintar = true;
     }
-  
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,6 +50,7 @@ public class Grafica extends javax.swing.JFrame {
         destino = new javax.swing.JComboBox<>();
         costo = new javax.swing.JTextField();
         okButton = new java.awt.Button();
+        label4 = new java.awt.Label();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 255));
@@ -89,50 +95,64 @@ public class Grafica extends javax.swing.JFrame {
         label3.setFont(new java.awt.Font("Lucida Bright", 3, 14)); // NOI18N
         label3.setText("Costo");
 
-        origen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        destino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         okButton.setFont(new java.awt.Font("Lucida Bright", 3, 14)); // NOI18N
         okButton.setLabel("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+
+        label4.setText("*Generador de aristas");
 
         javax.swing.GroupLayout aristaLayout = new javax.swing.GroupLayout(arista);
         arista.setLayout(aristaLayout);
         aristaLayout.setHorizontalGroup(
             aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(aristaLayout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(okButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(origen, 0, 87, Short.MAX_VALUE))
-                .addGap(38, 38, 38)
+                .addContainerGap()
                 .addGroup(aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(destino, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(costo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                    .addGroup(aristaLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(origen, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(destino, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(aristaLayout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(aristaLayout.createSequentialGroup()
+                                .addGap(29, 29, 29)
+                                .addComponent(costo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         aristaLayout.setVerticalGroup(
             aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(aristaLayout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(label4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(origen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(destino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(aristaLayout.createSequentialGroup()
+                        .addGroup(aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(aristaLayout.createSequentialGroup()
+                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
+                        .addGroup(aristaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(origen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(destino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(costo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
@@ -158,7 +178,7 @@ public class Grafica extends javax.swing.JFrame {
                     .addGroup(fondoLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(arista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -185,35 +205,58 @@ public class Grafica extends javax.swing.JFrame {
 
     private void panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelMouseClicked
         // TODO add your handling code here:
-        String nombre;
-        nombre = JOptionPane.showInputDialog(this.panel, "Ingrese el nombre del lugar");
-        System.out.println(evt.getX()+","+evt.getY());
-        if(validar(grafo, evt.getX(), evt.getY())==false)
-            if(grafo.validarNombre(nombre)==false){
-            paint.drawOval(nombre, this.panel.getGraphics(), evt.getX(), evt.getY());
-            grafo.lista.add(new Vertice(nombre, evt.getX(), evt.getY()));
-            }else{ 
-            JOptionPane.showMessageDialog(null, "Nombre repetido");
+        if (pintar == true) {
+            String nombre;
+            nombre = JOptionPane.showInputDialog(this.panel, "Ingrese el nombre del lugar");
+            if (validar(grafo, evt.getX(), evt.getY()) == false) {
+                if (grafo.validarNombre(nombre) == false) {
+                    Paint.drawOval(nombre, this.panel.getGraphics(), evt.getX(), evt.getY());
+                    grafo.lista.add(new Vertice(nombre, evt.getX(), evt.getY()));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Nombre repetido");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "¡No puede colocar un vertice encima de otro!");
             }
-        else
-            JOptionPane.showMessageDialog(null, "¡No puede colocar un vertice encima de otro!");
+        }
+
     }//GEN-LAST:event_panelMouseClicked
 
     private void terminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_terminarActionPerformed
         // TODO add your handling code here:
         arista.setVisible(true);
+        pintar=false;
+        llenarComboBox(origen, destino);
+        
     }//GEN-LAST:event_terminarActionPerformed
 
-    private boolean validar(Grafo grafo,int x, int y){
-        if(!grafo.lista.isEmpty())
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        // TODO add your handling code here:
+        String origenName = origen.getSelectedItem().toString();
+        String destinoName = origen.getSelectedItem().toString();
+        String costoName = costo.getText();
+        grafo.addAdyacente(origenName, destinoName, costoName);
+    }//GEN-LAST:event_okButtonActionPerformed
+
+    private boolean validar(Grafo grafo, int x, int y) {
+        if (!grafo.lista.isEmpty()) {
             for (Vertice vertice : grafo.lista) {
-                if(vertice.superPosicion(x, y)==true)
+                if (vertice.superPosicion(x, y) == true) {
                     return true;
-                else
+                } else {
                     return false;
+                }
             }
+        }
         return false;
     }
+    private void llenarComboBox(JComboBox box, JComboBox box2){
+        for (Vertice vertice : grafo.lista) {
+            box.addItem(vertice.getNombre());
+            box2.addItem(vertice.getNombre());
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -258,6 +301,7 @@ public class Grafica extends javax.swing.JFrame {
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
+    private java.awt.Label label4;
     private java.awt.Button okButton;
     private javax.swing.JComboBox<String> origen;
     private javax.swing.JPanel panel;

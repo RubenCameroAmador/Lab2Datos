@@ -24,8 +24,15 @@ public class Grafo {
                 return true;
         return false;
     }
-    static void addLista(String nombre, int x, int y){
-        
+    public void addAdyacente(String nombreOrigen, String nombreDestino, String costo){
+        Vertice temp=null;
+        for (Vertice vertice : lista) 
+            if(nombreDestino.equals(vertice.getNombre()))
+                temp=vertice;
+        if(temp!=null)
+            for (Vertice vertice : lista) 
+            if(vertice.getNombre().equals(nombreOrigen))
+                vertice.addArista(temp.getSerial(), Integer.parseInt(costo));
     }
   
 }
