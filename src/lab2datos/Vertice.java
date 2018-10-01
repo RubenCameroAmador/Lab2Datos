@@ -34,7 +34,14 @@ public class Vertice {
     public int getY() {
         return y;
     }
-    
-    
+    public boolean superPosicion(int xFinal, int yFinal){
+        int xInicial = this.getX();
+        int yInicial = this.getY();
+        Double norma = Math.sqrt(Math.pow(xFinal-xInicial, 2)+Math.pow(yFinal-yInicial,2));
+        if(norma<=(2*60))
+            return true;
+        else            
+        return false;
+    }
     
 }

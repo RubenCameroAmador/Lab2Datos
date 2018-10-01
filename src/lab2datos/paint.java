@@ -7,6 +7,7 @@ package lab2datos;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -20,4 +21,14 @@ public class paint {
         g.drawString(nombre, x+15, y+30);
         g.dispose();
     }
+    
+    private void  imagen(Graphics g){
+        ImageIcon mapa = new ImageIcon(new ImageIcon(getClass().getResource("imagen/bquilla.png")).getImage()); 
+        g.drawImage(mapa.getImage(),0 , 0, 200,200,null);
+    }
+    static boolean superPosicion(){
+        return false;
+    }
+    
+    
 }

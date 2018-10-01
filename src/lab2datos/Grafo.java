@@ -12,9 +12,13 @@ import java.util.LinkedList;
  * @author rdcamero
  */
 public class Grafo {
-    static LinkedList<Vertice> lista = new LinkedList<Vertice>();
+    LinkedList<Vertice> lista; //= new LinkedList<Vertice>();
+    
+    public Grafo(){
+       lista = new LinkedList<>();
+    }
    
-    private boolean validarNombre(String nombre){
+    public boolean validarNombre(String nombre){
         for (Vertice vertice : lista) 
             if(vertice.getNombre().equals(nombre))
                 return true;
