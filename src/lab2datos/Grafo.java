@@ -34,5 +34,11 @@ public class Grafo {
             if(vertice.getNombre().equals(nombreOrigen))
                 vertice.addArista(temp.getSerial(), Integer.parseInt(costo));
     }
+    public Vertice convertirSerial(int serial){
+        for (Vertice vertice : lista) 
+            if(serial==vertice.getSerial())
+                return vertice;
+        return null;
+    }
   
 }
