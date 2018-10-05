@@ -18,9 +18,9 @@ public class Paint {
     
     static void drawOval(String nombre, Graphics g, int x, int y){
         g.setColor(Color.BLACK);
-        g.fillOval(x, y, 60, 60);
+        g.fillOval(x-30, y-30, 60, 60);
         g.setColor(Color.WHITE);
-        g.drawString(nombre, x+15, y+30);
+        g.drawString(nombre, (x+15)-30, (y+30)-30);
         g.dispose();
     }
     
@@ -32,15 +32,9 @@ public class Paint {
         //Double norma = Math.sqrt(Math.pow(Xf-Xo, 2)+Math.pow(Yf-Yo,2));
         g.setColor(Color.BLACK);
         g.drawLine(Xo, Yo, Xf, Yf);
-            System.out.println("entro al dibujar");
-        
     }
     static void drawAll(Grafo grafo, Graphics g, JPanel panel){
-        //Aqui debe ir la imagen de la ciudad 
-        g.clearRect(0, 0, panel.getWidth(), panel.getHeight());
-        //investigar cual es el color firme 
-        g.setColor(Color.gray);
-        g.fillRect(0, 0, panel.getWidth(), panel.getHeight());
+       // panel.repaint();
         Vertice vertice2 = null;
         for (Vertice vertice1 : grafo.lista) {
             for (Arista arista : vertice1.aristas) {
@@ -57,6 +51,18 @@ public class Paint {
         g.drawImage(mapa.getImage(),0 , 0, 200,200,null);
     }
     
-    
+    public static Vertice seleccionar(Grafo grafo, int x, int y){
+        int Xv, Yv;
+        Double norma;
+        for (Vertice vertice : grafo.lista) {
+            Xv = vertice.getX();
+            Yv= vertice.getY();
+            norma = Math.sqrt(Math.pow((x-Xv), 2)+Math.pow((y-Yv), 2));
+            if(norma<=30){
+                return vertice;
+            }
+        }
+        return null;
+    }
     
 }
